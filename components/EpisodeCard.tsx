@@ -26,7 +26,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[16/12] overflow-hidden">
           <img
             src={episode.thumbnail}
             alt={episode.title}

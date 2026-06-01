@@ -6,6 +6,17 @@ export interface Episode {
   date: string;
   link: string;
   thumbnail: string;
+  categories: number[];
+  description: string;
+  transcript: string;
+  playerCode: string;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  count: number;
 }
 
 export interface FooterLink {

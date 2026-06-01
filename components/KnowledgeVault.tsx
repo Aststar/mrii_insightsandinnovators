@@ -127,7 +127,7 @@ const KnowledgeVault: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mb-4 group-hover:text-primary group-hover:bg-primary/10 transition-colors">
                 <ArrowRight size={24} />
               </div>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-primary transition-colors">View Full Curriculum</p>
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-primary transition-colors">View All Episodes</p>
             </motion.div>
           </Link>
         </div>

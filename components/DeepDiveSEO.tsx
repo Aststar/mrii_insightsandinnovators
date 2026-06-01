@@ -61,7 +61,7 @@ const DeepDiveSEO: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative h-full min-h-[400px]"
+              className="relative h-full min-h-[400px] overflow-hidden rounded-[2rem]"
             >
                <img 
                  src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80" 

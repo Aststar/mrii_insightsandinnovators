@@ -1,15 +1,17 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Radio, Globe, Heart, Share2, Youtube } from 'lucide-react';
+import { Radio, Globe, Heart, Share2, Youtube, Music, Headphones } from 'lucide-react';
 
 const platforms = [
-  { name: 'Greenbook Network', icon: <Globe size={24} />, color: '#1a4a5e' },
-  { name: 'Samsung App', icon: <Smartphone size={24} />, color: '#1428a0' },
-  { name: 'Player FM', icon: <Radio size={24} />, color: '#f39c12' },
-  { name: 'iHeart Radio', icon: <Heart size={24} />, color: '#c60030' },
-  { name: 'Podchaser', icon: <Share2 size={24} />, color: '#b244d7' },
-  { name: 'YouTube', icon: <Youtube size={24} />, color: '#ff0000' }
+  { name: 'Spotify', icon: <Music size={24} />, color: '#1DB954', url: 'https://open.spotify.com/show/4EyJeQzhfWNJaRJDU8i8Cm' },
+  { name: 'Apple Podcasts', icon: <Headphones size={24} />, color: '#9933CC', url: 'https://podcasts.apple.com/us/podcast/insights-innovators-podcast-from-mrii/id1765372856' },
+  { name: 'YouTube', icon: <Youtube size={24} />, color: '#ff0000', url: 'https://www.youtube.com/watch?v=oyg0YR93koQ&list=PL9ZbKlSKSGAWsggyyom2NRoQO1V1_UstK' },
+  { name: 'Amazon Music', icon: <Music size={24} />, color: '#00A8E1', url: 'https://music.amazon.com/podcasts/312fed45-d03e-4553-89c8-12cfb9bab3a2/insights-innovators-podcast-from-mrii' },
+  { name: 'iHeart Radio', icon: <Heart size={24} />, color: '#c60030', url: 'https://www.iheart.com/podcast/1323-insights-innovators-podca-212284235/' },
+  { name: 'Player FM', icon: <Radio size={24} />, color: '#f39c12', url: 'https://player.fm/series/3597609' },
+  { name: 'Podchaser', icon: <Share2 size={24} />, color: '#b244d7', url: 'https://www.podchaser.com/podcasts/insights-innovators-podcast-fr-5826762' },
+  { name: 'Greenbook Network', icon: <Globe size={24} />, color: '#1a4a5e', url: 'https://www.greenbook.org/podcast-network/insights-innovators-podcast' },
 ];
 
 const PodcastPlatforms: React.FC = () => {
@@ -50,7 +52,9 @@ const PodcastPlatforms: React.FC = () => {
           {platforms.map((platform, index) => (
             <motion.a
               key={platform.name}
-              href="#"
+              href={platform.url}
+            target="_blank"
+            rel="noopener noreferrer"
               initial="initial"
               whileInView="visible"
               whileHover="hover"

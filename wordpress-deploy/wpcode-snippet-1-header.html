@@ -1,0 +1,36 @@
+<!-- MRII App: Header Scripts & Styles -->
+<!-- Paste this in WPCode as an HTML Snippet, inserted in: Site Wide Header -->
+<!-- OR use the "Page Specific" option and target only the podcast page -->
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+  #mrii-app-root, #mrii-app-root * {
+    font-family: 'Inter', sans-serif;
+  }
+  #mrii-app-root h1, #mrii-app-root h2, #mrii-app-root h3 {
+    font-family: 'Montserrat', sans-serif;
+  }
+  #mrii-app-root .text-primary { color: #eb2d3f; }
+  #mrii-app-root .bg-primary  { background-color: #eb2d3f; }
+  #mrii-app-root .border-primary { border-color: #eb2d3f; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #f1f1f1; }
+  ::-webkit-scrollbar-thumb { background: #eb2d3f; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: #d11d2e; }
+</style>
+
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "framer-motion": "https://esm.sh/framer-motion@^12.29.0"
+  }
+}
+</script>

@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Header from './components/Header';
 import Hero from './components/Hero';
 import PodcastPlatforms from './components/PodcastPlatforms';
 import FeaturedEpisodes from './components/FeaturedEpisodes';
@@ -10,7 +9,6 @@ import KnowledgeVault from './components/KnowledgeVault';
 import CertificationRoadmap from './components/CertificationRoadmap';
 import LeadMagnetForm from './components/LeadMagnetForm';
 import Benefits from './components/Benefits';
-import Footer from './components/Footer';
 import AllEpisodes from './components/AllEpisodes';
 import EpisodePage from './components/EpisodePage';
 
@@ -88,8 +86,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary overflow-x-hidden bg-white">
-      <Header />
-
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/allepisodes" element={
@@ -103,8 +99,6 @@ const App: React.FC = () => {
           </main>
         } />
       </Routes>
-
-      <Footer />
     </div>
   );
 };
