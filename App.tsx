@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Header from './components/Header';
 import Hero from './components/Hero';
 import PodcastPlatforms from './components/PodcastPlatforms';
 import FeaturedEpisodes from './components/FeaturedEpisodes';
@@ -88,8 +87,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary overflow-x-hidden bg-white">
-      <Header />
-
       <Routes>
         {/* Local dev / preview convenience: bounce root to the canonical listing URL */}
         <Route path="/" element={<Navigate to="/insights-innovators-new" replace />} />
