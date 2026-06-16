@@ -9,11 +9,20 @@ interface WPPodcast {
   slug: string;
   date: string;
   link: string;
+  episode_player?: string;
+  episode_description?: string;
   _embedded?: {
     'wp:featuredmedia'?: Array<{
       source_url: string;
     }>;
   };
+}
+
+/** Pull the iframe `src` out of the WP `episode_player` HTML blob. Returns null if none found. */
+function extractPlayerUrl(html?: string): string | null {
+  if (!html) return null;
+  const match = html.match(/<iframe[^>]*\ssrc=["']([^"']+)["']/i);
+  return match ? match[1] : null;
 }
 
 function mapWPToEpisode(post: WPPodcast): Episode {
@@ -28,6 +37,8 @@ function mapWPToEpisode(post: WPPodcast): Episode {
     date: post.date,
     link: post.link,
     thumbnail,
+    playerUrl: extractPlayerUrl(post.episode_player),
+    description: post.episode_description ?? '',
   };
 }
 
@@ -42,7 +53,8 @@ export function useEpisodes(perPage: number = 100) {
     async function fetchEpisodes() {
       try {
         const res = await fetch(
-          `${WP_API_URL}?_embed&per_page=${perPage}&orderby=date&order=desc`
+          `${WP_API_URL}?_embed&per_page=${perPage}&orderby=date&order=desc` +
+            `&_fields=id,title,slug,date,link,episode_player,episode_description,_links,_embedded`
         );
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const data: WPPodcast[] = await res.json();

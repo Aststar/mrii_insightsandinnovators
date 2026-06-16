@@ -1,10 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
-  ExternalLink,
   Calendar,
   Globe,
   Radio,
@@ -13,8 +12,11 @@ import {
   Youtube,
   Headphones,
   Music,
+  FileText,
+  ChevronDown,
 } from 'lucide-react';
 import { useEpisodes } from '../hooks/useEpisodes';
+import { useEpisodeTranscript } from '../hooks/useEpisodeTranscript';
 
 const PLATFORM_LINKS = [
   {
@@ -70,8 +72,10 @@ const PLATFORM_LINKS = [
 const EpisodePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { episodes, loading, error } = useEpisodes(100);
+  const [showTranscript, setShowTranscript] = useState(false);
 
   const episode = episodes.find(ep => ep.slug === slug);
+  const { transcript, loading: transcriptLoading } = useEpisodeTranscript(episode?.id);
 
   const formattedDate = episode
     ? new Date(episode.date).toLocaleDateString('en-US', {
@@ -108,7 +112,7 @@ const EpisodePage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Episode Not Found</h1>
           <p className="text-gray-600 mb-8">The episode you're looking for doesn't exist.</p>
           <Link
-            to="/allepisodes"
+            to="/insights-and-innovators-podcast/all-episodes"
             className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
           >
             <ArrowLeft size={18} /> Browse All Episodes
@@ -142,7 +146,7 @@ const EpisodePage: React.FC = () => {
             className="mb-8"
           >
             <Link
-              to="/allepisodes"
+              to="/insights-and-innovators-podcast/all-episodes"
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold text-sm transition-colors"
             >
               <ArrowLeft size={16} /> All Episodes
@@ -185,7 +189,7 @@ const EpisodePage: React.FC = () => {
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10 pb-24">
-        {/* Spotify Embed Player */}
+        {/* Episode Player (per-episode embed from WordPress, Spotify show as fallback) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -193,17 +197,31 @@ const EpisodePage: React.FC = () => {
           className="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden mb-8"
         >
           <div className="p-6 md:p-8">
-            <iframe
-              style={{ borderRadius: '12px' }}
-              src="https://open.spotify.com/embed/show/4EyJeQzhfWNJaRJDU8i8Cm?utm_source=generator&theme=0"
-              width="100%"
-              height="352"
-              frameBorder="0"
-              allowFullScreen
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              title="Spotify Player"
-            />
+            {episode.playerUrl ? (
+              <iframe
+                style={{ borderRadius: '12px' }}
+                src={episode.playerUrl}
+                width="100%"
+                height="200"
+                frameBorder="0"
+                scrolling="no"
+                allow="clipboard-write"
+                loading="lazy"
+                title={`Listen: ${episode.title}`}
+              />
+            ) : (
+              <iframe
+                style={{ borderRadius: '12px' }}
+                src="https://open.spotify.com/embed/show/4EyJeQzhfWNJaRJDU8i8Cm?utm_source=generator&theme=0"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                title="Insights & Innovators Podcast"
+              />
+            )}
           </div>
         </motion.div>
 
@@ -214,23 +232,21 @@ const EpisodePage: React.FC = () => {
           transition={{ delay: 0.3 }}
           className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8 mb-8"
         >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 pb-8 border-b border-gray-100">
-            <div>
-              <h2 className="text-xl font-extrabold text-gray-900 mb-2">Show Notes & Transcript</h2>
-              <p className="text-gray-500 text-sm">
-                Full episode details, transcript, and resources on the MRII website.
-              </p>
-            </div>
-            <a
-              href={episode.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-colors shadow-md shadow-primary/20 shrink-0"
-            >
-              <ExternalLink size={18} />
-              View Full Show Notes
-            </a>
+          <div className="mb-8 pb-8 border-b border-gray-100">
+            <h2 className="text-xl font-extrabold text-gray-900 mb-2">Show Notes</h2>
+            <p className="text-gray-500 text-sm">
+              {episode.description
+                ? 'Episode summary, full transcript, and where to listen — all below.'
+                : 'Full transcript and where to listen — all below.'}
+            </p>
           </div>
+
+          {episode.description && (
+            <div
+              className="text-gray-600 text-base leading-relaxed mb-8 pb-8 border-b border-gray-100 [&_a]:text-primary [&_a]:font-semibold [&_a:hover]:underline"
+              dangerouslySetInnerHTML={{ __html: episode.description }}
+            />
+          )}
 
           <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">
             Listen & Subscribe
@@ -256,6 +272,56 @@ const EpisodePage: React.FC = () => {
               </a>
             ))}
           </div>
+
+          {/* Transcript (expandable) */}
+          <div className="mt-8 pt-8 border-t border-gray-100">
+            <button
+              onClick={() => setShowTranscript(v => !v)}
+              aria-expanded={showTranscript}
+              className="flex items-center justify-between w-full gap-4 text-left group"
+            >
+              <span className="flex items-center gap-2.5">
+                <span className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <FileText size={16} />
+                </span>
+                <span className="text-sm font-bold text-gray-900 uppercase tracking-widest group-hover:text-primary transition-colors">
+                  Full Transcript
+                </span>
+              </span>
+              <ChevronDown
+                size={20}
+                className={`text-gray-400 transition-transform duration-300 ${showTranscript ? 'rotate-180' : ''}`}
+              />
+            </button>
+
+            <AnimatePresence initial={false}>
+              {showTranscript && (
+                <motion.div
+                  key="transcript"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-6">
+                    {transcriptLoading ? (
+                      <p className="text-gray-400 text-sm font-medium py-4">Loading transcript…</p>
+                    ) : transcript ? (
+                      <div
+                        className="max-h-[600px] overflow-y-auto pr-4 text-gray-600 text-[15px] leading-relaxed whitespace-pre-line [&_b]:text-gray-900 [&_b]:font-semibold"
+                        dangerouslySetInnerHTML={{ __html: transcript }}
+                      />
+                    ) : (
+                      <p className="text-gray-400 text-sm font-medium py-4">
+                        Transcript not available for this episode.
+                      </p>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
 
         {/* More Episodes */}
@@ -269,7 +335,7 @@ const EpisodePage: React.FC = () => {
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-extrabold text-gray-900">More Episodes</h2>
               <Link
-                to="/allepisodes"
+                to="/insights-and-innovators-podcast/all-episodes"
                 className="text-primary font-bold text-sm hover:underline"
               >
                 View All
@@ -286,9 +352,9 @@ const EpisodePage: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                   >
-                    <Link to={`/episode/${ep.slug}`} className="block group">
+                    <Link to={`/podcast/${ep.slug}`} className="block group">
                       <div className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all">
-                        <div className="aspect-[16/10] overflow-hidden">
+                        <div className="aspect-square overflow-hidden">
                           <img
                             src={ep.thumbnail}
                             alt={ep.title}

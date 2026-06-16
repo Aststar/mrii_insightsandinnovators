@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import PodcastPlatforms from './components/PodcastPlatforms';
@@ -91,13 +91,15 @@ const App: React.FC = () => {
       <Header />
 
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/allepisodes" element={
+        {/* Local dev / preview convenience: bounce root to the canonical listing URL */}
+        <Route path="/" element={<Navigate to="/insights-and-innovators-podcast" replace />} />
+        <Route path="/insights-and-innovators-podcast" element={<LandingPage />} />
+        <Route path="/insights-and-innovators-podcast/all-episodes" element={
           <main className="flex-grow">
             <AllEpisodes />
           </main>
         } />
-        <Route path="/episode/:slug" element={
+        <Route path="/podcast/:slug" element={
           <main className="flex-grow">
             <EpisodePage />
           </main>

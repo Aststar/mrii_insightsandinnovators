@@ -105,7 +105,7 @@ const KnowledgeVault: React.FC = () => {
                   </span>
                   
                   <Link
-                    to={`/allepisodes?topic=${topic.filter}`}
+                    to={`/insights-and-innovators-podcast/all-episodes?topic=${topic.filter}`}
                     className="flex items-center gap-2 text-xs font-bold text-gray-400 group-hover:text-gray-900 transition-colors"
                   >
                     <span>Related Episodes</span>
@@ -117,7 +117,7 @@ const KnowledgeVault: React.FC = () => {
           ))}
           
           {/* View Full Curriculum Card */}
-          <Link to="/allepisodes">
+          <Link to="/insights-and-innovators-podcast/all-episodes">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -127,7 +127,7 @@ const KnowledgeVault: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mb-4 group-hover:text-primary group-hover:bg-primary/10 transition-colors">
                 <ArrowRight size={24} />
               </div>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-primary transition-colors">View Full Curriculum</p>
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-primary transition-colors">View All Episodes</p>
             </motion.div>
           </Link>
         </div>

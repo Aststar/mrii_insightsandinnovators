@@ -41,7 +41,7 @@ const FeaturedEpisodes: React.FC = () => {
               The most impactful conversations from the forefront of global market research.
             </motion.p>
           </div>
-          <Link to="/allepisodes">
+          <Link to="/insights-and-innovators-podcast/all-episodes">
             <motion.span
               whileHover={{ x: 5 }}
               className="flex items-center gap-2 text-primary font-bold text-lg hover:underline transition-all"

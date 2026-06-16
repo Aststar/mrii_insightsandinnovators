@@ -112,7 +112,7 @@ const DeepDiveSEO: React.FC = () => {
                 Our episodes breakdown complex AI topics into actionable strategies for reshaping survey design, 
                 sentiment analysis, and reporting speeds.
               </p>
-              <Link to="/allepisodes?topic=AI" className="text-primary font-bold hover:underline flex items-center gap-2">
+              <Link to="/insights-and-innovators-podcast/all-episodes?topic=AI" className="text-primary font-bold hover:underline flex items-center gap-2">
                 Listen to AI Episodes <span aria-hidden="true">&rarr;</span>
               </Link>
             </motion.div>
@@ -134,7 +134,7 @@ const DeepDiveSEO: React.FC = () => {
                 Hear directly from VPs and Directors at Fortune 500 companies on how to turn raw data into 
                 business-critical strategy that influences the C-suite.
               </p>
-              <Link to="/allepisodes?topic=Leadership" className="text-blue-600 font-bold hover:underline flex items-center gap-2">
+              <Link to="/insights-and-innovators-podcast/all-episodes?topic=Leadership" className="text-blue-600 font-bold hover:underline flex items-center gap-2">
                 Explore Leadership Series <span aria-hidden="true">&rarr;</span>
               </Link>
             </motion.div>

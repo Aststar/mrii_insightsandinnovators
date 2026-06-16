@@ -6,6 +6,10 @@ export interface Episode {
   date: string;
   link: string;
   thumbnail: string;
+  /** Per-episode player embed URL (e.g. Captivate), extracted from WP `episode_player`. Null if none set. */
+  playerUrl: string | null;
+  /** Episode show-notes HTML from WP `episode_description`. Empty string if none set. */
+  description: string;
 }
 
 export interface FooterLink {

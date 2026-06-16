@@ -82,7 +82,7 @@ const Hero: React.FC = () => {
                 <Play className="fill-current" size={24} />
                 START LISTENING
               </motion.button>
-              <Link to="/allepisodes" className="flex items-center justify-center gap-3 bg-white border-2 border-gray-100 hover:border-primary text-gray-900 px-8 py-5 rounded-2xl font-bold text-lg transition-all">
+              <Link to="/insights-and-innovators-podcast/all-episodes" className="flex items-center justify-center gap-3 bg-white border-2 border-gray-100 hover:border-primary text-gray-900 px-8 py-5 rounded-2xl font-bold text-lg transition-all">
                 Browse Archive
               </Link>
             </div>

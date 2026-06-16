@@ -20,7 +20,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
   });
 
   return (
-    <Link to={`/episode/${episode.slug}`} className="block">
+    <Link to={`/podcast/${episode.slug}`} className="block">
       <motion.div
         className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm transition-all hover:shadow-2xl hover:-translate-y-2"
         onMouseEnter={() => setIsHovered(true)}
