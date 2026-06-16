@@ -105,7 +105,7 @@ const KnowledgeVault: React.FC = () => {
                   </span>
                   
                   <Link
-                    to={`/insights-and-innovators-podcast/all-episodes?topic=${topic.filter}`}
+                    to={`/insights-innovators-new/allepisodes?topic=${topic.filter}`}
                     className="flex items-center gap-2 text-xs font-bold text-gray-400 group-hover:text-gray-900 transition-colors"
                   >
                     <span>Related Episodes</span>
@@ -117,7 +117,7 @@ const KnowledgeVault: React.FC = () => {
           ))}
           
           {/* View Full Curriculum Card */}
-          <Link to="/insights-and-innovators-podcast/all-episodes">
+          <Link to="/insights-innovators-new/allepisodes">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

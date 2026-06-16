@@ -112,7 +112,7 @@ const EpisodePage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Episode Not Found</h1>
           <p className="text-gray-600 mb-8">The episode you're looking for doesn't exist.</p>
           <Link
-            to="/insights-and-innovators-podcast/all-episodes"
+            to="/insights-innovators-new/allepisodes"
             className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
           >
             <ArrowLeft size={18} /> Browse All Episodes
@@ -146,7 +146,7 @@ const EpisodePage: React.FC = () => {
             className="mb-8"
           >
             <Link
-              to="/insights-and-innovators-podcast/all-episodes"
+              to="/insights-innovators-new/allepisodes"
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold text-sm transition-colors"
             >
               <ArrowLeft size={16} /> All Episodes
@@ -335,7 +335,7 @@ const EpisodePage: React.FC = () => {
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-extrabold text-gray-900">More Episodes</h2>
               <Link
-                to="/insights-and-innovators-podcast/all-episodes"
+                to="/insights-innovators-new/allepisodes"
                 className="text-primary font-bold text-sm hover:underline"
               >
                 View All

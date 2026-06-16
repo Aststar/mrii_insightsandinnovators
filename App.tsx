@@ -92,9 +92,9 @@ const App: React.FC = () => {
 
       <Routes>
         {/* Local dev / preview convenience: bounce root to the canonical listing URL */}
-        <Route path="/" element={<Navigate to="/insights-and-innovators-podcast" replace />} />
-        <Route path="/insights-and-innovators-podcast" element={<LandingPage />} />
-        <Route path="/insights-and-innovators-podcast/all-episodes" element={
+        <Route path="/" element={<Navigate to="/insights-innovators-new" replace />} />
+        <Route path="/insights-innovators-new" element={<LandingPage />} />
+        <Route path="/insights-innovators-new/allepisodes" element={
           <main className="flex-grow">
             <AllEpisodes />
           </main>
