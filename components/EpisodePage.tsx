@@ -70,6 +70,13 @@ const PLATFORM_LINKS = [
   },
 ];
 
+/** Format transcript by inserting a line break before each timestamp */
+function formatTranscript(html: string): string {
+  if (!html) return html;
+  // Insert <br><br> before each [HH:MM:SS] timestamp (except the very first)
+  return html.replace(/(?<!^)\[(\d{2}:\d{2}:\d{2})\]/g, '<br><br>[$1]');
+}
+
 /** Extract the Captivate iframe src from the raw embed HTML stored in WP meta */
 function extractCaptivateEmbedSrc(playerCode: string): string | null {
   if (!playerCode) return null;
@@ -289,7 +296,7 @@ const EpisodePage: React.FC = () => {
                   <div className="px-6 md:px-8 pb-8 pt-2 border-t border-gray-100">
                     <div
                       className="prose prose-gray max-w-none text-gray-700 leading-relaxed text-sm episode-transcript"
-                      dangerouslySetInnerHTML={{ __html: episode.transcript }}
+                      dangerouslySetInnerHTML={{ __html: formatTranscript(episode.transcript) }}
                     />
                   </div>
                 </motion.div>

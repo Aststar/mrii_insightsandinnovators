@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
           
           <motion.div
@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
               </span>
-              <span className="text-primary font-black uppercase tracking-[0.2em] text-[10px]">New Episodes Every Tuesday</span>
+              <span className="text-primary font-black uppercase tracking-[0.2em] text-[10px]">New Episodes Every Thursday</span>
             </div>
             
             <h1 className="text-5xl lg:text-7xl font-black text-gray-900 leading-[0.95] mb-6 tracking-tighter">
@@ -87,26 +87,10 @@ const Hero: React.FC = () => {
               </Link>
             </div>
             
-            <div className="flex items-center gap-8">
-              <div className="flex -space-x-4">
-                {[1, 2, 3].map((i) => (
-                  <img 
-                    key={i} 
-                    className="w-10 h-10 rounded-full border-4 border-white shadow-lg" 
-                    src={`https://i.pravatar.cc/150?u=insight${i}`} 
-                    alt="Listener" 
-                  />
-                ))}
-                <div className="w-10 h-10 rounded-full border-4 border-white bg-gray-900 text-white flex items-center justify-center text-[10px] font-bold shadow-lg">
-                  +2k
-                </div>
-              </div>
-              <div className="h-10 w-[2px] bg-gray-100 hidden sm:block"></div>
-              <div>
-                <p className="text-[10px] font-black text-gray-900 leading-none mb-1 uppercase tracking-wider">Top Rated</p>
-                <div className="flex text-primary gap-1">
-                  {[1, 2, 3, 4, 5].map(s => <Sparkles key={s} size={10} fill="currentColor" />)}
-                </div>
+            <div className="flex flex-col gap-1">
+              <p className="text-[10px] font-black text-gray-900 leading-none uppercase tracking-wider">Top Rated Podcast</p>
+              <div className="flex text-primary gap-1">
+                {[1, 2, 3, 4, 5].map(s => <Sparkles key={s} size={10} fill="currentColor" />)}
               </div>
             </div>
           </motion.div>
