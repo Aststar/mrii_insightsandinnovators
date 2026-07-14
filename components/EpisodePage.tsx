@@ -18,56 +18,73 @@ import {
 import { useEpisodes } from '../hooks/useEpisodes';
 import { useEpisodeTranscript } from '../hooks/useEpisodeTranscript';
 
+// `key` matches the WP field name for the per-episode link; `url` is the
+// generic show-level fallback used when an episode has no per-episode link.
 const PLATFORM_LINKS = [
   {
     name: 'Spotify',
+    key: 'spotify',
     icon: <Music size={18} />,
     color: '#1DB954',
     url: 'https://open.spotify.com/show/4EyJeQzhfWNJaRJDU8i8Cm',
   },
   {
     name: 'Apple Podcasts',
+    key: 'apple_podcasts',
     icon: <Headphones size={18} />,
     color: '#9933CC',
     url: 'https://podcasts.apple.com/us/podcast/insights-innovators-podcast-from-mrii/id1765372856',
   },
   {
     name: 'YouTube',
+    key: 'youtube',
     icon: <Youtube size={18} />,
     color: '#FF0000',
     url: 'https://www.youtube.com/watch?v=oyg0YR93koQ&list=PL9ZbKlSKSGAWsggyyom2NRoQO1V1_UstK',
   },
   {
     name: 'Amazon Music',
+    key: 'amazon_music',
     icon: <Music size={18} />,
     color: '#00A8E1',
     url: 'https://music.amazon.com/podcasts/312fed45-d03e-4553-89c8-12cfb9bab3a2/insights-innovators-podcast-from-mrii',
   },
   {
     name: 'iHeart Radio',
+    key: 'iheart_radio',
     icon: <Heart size={18} />,
     color: '#C6002B',
     url: 'https://www.iheart.com/podcast/1323-insights-innovators-podca-212284235/',
   },
   {
     name: 'Player FM',
+    key: 'player_fm',
     icon: <Radio size={18} />,
     color: '#F39C12',
     url: 'https://player.fm/series/3597609',
   },
   {
     name: 'Podchaser',
+    key: 'podchaser',
     icon: <Share2 size={18} />,
     color: '#B244D7',
     url: 'https://www.podchaser.com/podcasts/insights-innovators-podcast-fr-5826762',
   },
   {
     name: 'Greenbook Network',
+    key: 'greenbook_network',
     icon: <Globe size={18} />,
     color: '#1A4A5E',
     url: 'https://www.greenbook.org/podcast-network/insights-innovators-podcast',
   },
 ];
+
+/** Format transcript by inserting a line break before each timestamp */
+function formatTranscript(html: string): string {
+  if (!html) return html;
+  // Insert <br><br> before each [HH:MM:SS] timestamp (except the very first)
+  return html.replace(/(?<!^)\[(\d{2}:\d{2}:\d{2})\]/g, '<br><br>[$1]');
+}
 
 const EpisodePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -112,7 +129,7 @@ const EpisodePage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Episode Not Found</h1>
           <p className="text-gray-600 mb-8">The episode you're looking for doesn't exist.</p>
           <Link
-            to="/insights-innovators-new/allepisodes"
+            to="/insights-and-innovators-podcast/allepisodes"
             className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
           >
             <ArrowLeft size={18} /> Browse All Episodes
@@ -139,19 +156,21 @@ const EpisodePage: React.FC = () => {
         </div>
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-32">
-          {/* Back Link */}
-          <motion.div
+          {/* Breadcrumb */}
+          <motion.nav
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            className="mb-8"
+            aria-label="Breadcrumb"
+            className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold text-white/70"
           >
-            <Link
-              to="/insights-innovators-new/allepisodes"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold text-sm transition-colors"
-            >
-              <ArrowLeft size={16} /> All Episodes
+            <Link to="/insights-and-innovators-podcast" className="hover:text-white transition-colors">
+              Insights &amp; Innovators Podcast
             </Link>
-          </motion.div>
+            <span className="text-white/40">/</span>
+            <Link to="/insights-and-innovators-podcast/allepisodes" className="hover:text-white transition-colors">
+              All Episodes
+            </Link>
+          </motion.nav>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -255,7 +274,7 @@ const EpisodePage: React.FC = () => {
             {PLATFORM_LINKS.map(platform => (
               <a
                 key={platform.name}
-                href={platform.url}
+                href={episode.platforms[platform.key] || platform.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-bold text-gray-700 border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all group"
@@ -310,7 +329,7 @@ const EpisodePage: React.FC = () => {
                     ) : transcript ? (
                       <div
                         className="max-h-[600px] overflow-y-auto pr-4 text-gray-600 text-[15px] leading-relaxed whitespace-pre-line [&_b]:text-gray-900 [&_b]:font-semibold"
-                        dangerouslySetInnerHTML={{ __html: transcript }}
+                        dangerouslySetInnerHTML={{ __html: formatTranscript(transcript) }}
                       />
                     ) : (
                       <p className="text-gray-400 text-sm font-medium py-4">
@@ -335,7 +354,7 @@ const EpisodePage: React.FC = () => {
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-extrabold text-gray-900">More Episodes</h2>
               <Link
-                to="/insights-innovators-new/allepisodes"
+                to="/insights-and-innovators-podcast/allepisodes"
                 className="text-primary font-bold text-sm hover:underline"
               >
                 View All

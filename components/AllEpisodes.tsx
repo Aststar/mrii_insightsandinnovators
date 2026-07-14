@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 import EpisodeCard from './EpisodeCard';
@@ -97,6 +97,18 @@ const AllEpisodes: React.FC = () => {
   return (
     <section className="py-24 bg-gray-50/50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumb */}
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-8 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm font-semibold text-gray-500"
+        >
+          <Link to="/insights-and-innovators-podcast" className="hover:text-primary transition-colors">
+            Insights &amp; Innovators Podcast
+          </Link>
+          <span className="text-gray-300">/</span>
+          <span className="text-gray-900">All Episodes</span>
+        </nav>
+
         {/* Header */}
         <div className="text-center mb-16">
           <motion.div
@@ -142,7 +154,7 @@ const AllEpisodes: React.FC = () => {
               onChange={e => handleSearchChange(e.target.value)}
               placeholder="Search episodes by title or keyword..."
               aria-label="Search episodes"
-              className="w-full pl-11 pr-11 py-3 rounded-full border border-gray-200 bg-white text-sm font-medium text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary shadow-sm"
+              className="w-full pl-12 pr-11 py-3 rounded-full border border-gray-200 bg-white text-sm font-medium text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary shadow-sm"
             />
             {searchQuery && (
               <button

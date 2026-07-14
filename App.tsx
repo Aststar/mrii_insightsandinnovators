@@ -3,13 +3,13 @@ import React, { useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Hero from './components/Hero';
 import PodcastPlatforms from './components/PodcastPlatforms';
+import Sponsor from './components/Sponsor';
 import FeaturedEpisodes from './components/FeaturedEpisodes';
 import DeepDiveSEO from './components/DeepDiveSEO';
 import KnowledgeVault from './components/KnowledgeVault';
 import CertificationRoadmap from './components/CertificationRoadmap';
 import LeadMagnetForm from './components/LeadMagnetForm';
 import Benefits from './components/Benefits';
-import Footer from './components/Footer';
 import AllEpisodes from './components/AllEpisodes';
 import EpisodePage from './components/EpisodePage';
 
@@ -41,6 +41,10 @@ const LandingPage: React.FC = () => {
 
         <div className="scroll-trigger opacity-0 transition-opacity duration-700 ease-out [&.animate-in]:opacity-100">
           <PodcastPlatforms />
+        </div>
+
+        <div className="scroll-trigger opacity-0 transition-opacity duration-700 ease-out [&.animate-in]:opacity-100">
+          <Sponsor />
         </div>
 
         <div className="scroll-trigger opacity-0 translate-y-10 transition-all duration-1000 ease-out [&.animate-in]:opacity-100 [&.animate-in]:translate-y-0">
@@ -89,9 +93,9 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col selection:bg-primary/20 selection:text-primary overflow-x-hidden bg-white">
       <Routes>
         {/* Local dev / preview convenience: bounce root to the canonical listing URL */}
-        <Route path="/" element={<Navigate to="/insights-innovators-new" replace />} />
-        <Route path="/insights-innovators-new" element={<LandingPage />} />
-        <Route path="/insights-innovators-new/allepisodes" element={
+        <Route path="/" element={<Navigate to="/insights-and-innovators-podcast" replace />} />
+        <Route path="/insights-and-innovators-podcast" element={<LandingPage />} />
+        <Route path="/insights-and-innovators-podcast/allepisodes" element={
           <main className="flex-grow">
             <AllEpisodes />
           </main>
@@ -102,8 +106,6 @@ const App: React.FC = () => {
           </main>
         } />
       </Routes>
-
-      <Footer />
     </div>
   );
 };

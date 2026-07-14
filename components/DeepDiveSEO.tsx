@@ -61,11 +61,11 @@ const DeepDiveSEO: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative h-full min-h-[400px]"
+              className="relative h-[320px] sm:h-[400px] lg:h-[480px] rounded-[2rem] overflow-hidden"
             >
-               <img 
-                 src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80" 
-                 alt="Professional Podcast Studio" 
+               <img
+                 src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80"
+                 alt="Professional Podcast Studio"
                  className="absolute inset-0 w-full h-full object-cover rounded-[2rem] shadow-2xl"
                />
                <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-black/10"></div>
@@ -112,7 +112,7 @@ const DeepDiveSEO: React.FC = () => {
                 Our episodes breakdown complex AI topics into actionable strategies for reshaping survey design, 
                 sentiment analysis, and reporting speeds.
               </p>
-              <Link to="/insights-innovators-new/allepisodes?topic=AI" className="text-primary font-bold hover:underline flex items-center gap-2">
+              <Link to="/insights-and-innovators-podcast/allepisodes?topic=AI" className="text-primary font-bold hover:underline flex items-center gap-2">
                 Listen to AI Episodes <span aria-hidden="true">&rarr;</span>
               </Link>
             </motion.div>
@@ -134,7 +134,7 @@ const DeepDiveSEO: React.FC = () => {
                 Hear directly from VPs and Directors at Fortune 500 companies on how to turn raw data into 
                 business-critical strategy that influences the C-suite.
               </p>
-              <Link to="/insights-innovators-new/allepisodes?topic=Leadership" className="text-blue-600 font-bold hover:underline flex items-center gap-2">
+              <Link to="/insights-and-innovators-podcast/allepisodes?topic=Leadership" className="text-blue-600 font-bold hover:underline flex items-center gap-2">
                 Explore Leadership Series <span aria-hidden="true">&rarr;</span>
               </Link>
             </motion.div>
